@@ -19,6 +19,8 @@
     <!-- Sets global usings -->
     <ItemGroup>
         <Using Include="System" />
+        <Using Include="Microsoft.Xna.Framework" />
+        <Using Include="Microsoft.Xna.Framework.Graphics" />
     </ItemGroup>
     <!-- Sets FNA as a project dependency -->
     <ItemGroup>
