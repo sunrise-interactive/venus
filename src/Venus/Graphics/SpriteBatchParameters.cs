@@ -58,12 +58,24 @@ public record struct SpriteBatchParameters
     }
 }
 
+/// <summary>
+///     Provides <see cref="SpriteBatch"/> extensions for working with <see cref="SpriteBatchParameters"/>.
+/// </summary>
 public static class SpriteBatchParametersExtensions
 {
     extension(SpriteBatch spriteBatch)
     {
+        /// <summary>
+        ///     Gets the current parameters of the sprite batch.
+        /// </summary>
         public SpriteBatchParameters Parameters => new SpriteBatchParameters(spriteBatch);
         
+        /// <summary>
+        ///     Begins the sprite batch with the specified parameters.
+        /// </summary>
+        /// <param name="parameters">
+        ///     The parameters to begin the sprite batch with.
+        /// </param>
         public void Begin(in SpriteBatchParameters parameters) => spriteBatch.Begin
         (
             parameters.SpriteSortMode, 
