@@ -12,6 +12,14 @@ public sealed class Asset<TValue> : IDisposable where TValue : class
     /// </summary>
     public AssetState State { get; private set; }
     
+    /// <summary>
+    ///     Gets a value indicating whether the asset is disposed.
+    /// </summary>
+    /// <value>
+    ///     <see langword="true"/> if the asset is disposed; otherwise, <see langword="false"/>.
+    /// </value>
+    public bool Disposed => State == AssetState.Disposed;
+    
     internal Asset(TValue value)
     {
         ArgumentNullException.ThrowIfNull(value);
