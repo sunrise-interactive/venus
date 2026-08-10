@@ -1,0 +1,30 @@
+<Project>
+    <!-- Sets target framework and language version -->
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+    <!-- Sets build properties -->
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <AssemblyName>Venus</AssemblyName>
+        <RootNamespace>Venus</RootNamespace>
+    </PropertyGroup>
+    <!-- Sets compilation options -->
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <!-- Sets global usings -->
+    <ItemGroup>
+        <Using Include="System" />
+    </ItemGroup>
+    <!-- Imports SILK.Net -->
+    <ItemGroup>
+        <PackageReference Include="Silk.NET.OpenGL" Version="2.23.0" />
+        <PackageReference Include="Silk.NET.Input" Version="2.23.0" />
+        <PackageReference Include="Silk.NET.Maths" Version="2.23.0" />
+        <PackageReference Include="Silk.NET.Windowing" Version="2.23.0" />
+    </ItemGroup>
+</Project>
