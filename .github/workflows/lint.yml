@@ -1,0 +1,29 @@
+name: .NET Lint
+
+on:
+  push:
+    branches: '**'
+  pull_request:
+    branches: '**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Update submodules
+      run: git submodule update --init --recursive
+
+    - name: Run .NET restore
+      run: dotnet restore
+
+    - name: Run .NET format
+      run: dotnet format Venus.sln --verify-no-changes
