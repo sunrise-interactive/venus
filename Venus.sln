@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Venus", "src\Venus\Venus.csproj", "{9CBF083F-231B-4BC6-99DA-0616AD2131BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Venus.Examples", "src\Venus.Examples\Venus.Examples.csproj", "{6D54ABE3-96C5-4A1E-94AF-1D6539747EBC}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FNA.Core", "submodules\FNA\FNA.Core.csproj", "{52EACABD-44B4-487A-88A1-BE4F5221D442}"
 EndProject
 Global
@@ -22,5 +24,9 @@ Global
 		{52EACABD-44B4-487A-88A1-BE4F5221D442}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52EACABD-44B4-487A-88A1-BE4F5221D442}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52EACABD-44B4-487A-88A1-BE4F5221D442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D54ABE3-96C5-4A1E-94AF-1D6539747EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D54ABE3-96C5-4A1E-94AF-1D6539747EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D54ABE3-96C5-4A1E-94AF-1D6539747EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D54ABE3-96C5-4A1E-94AF-1D6539747EBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,8 +1,10 @@
-﻿namespace Venus;
+﻿using System.Collections.Concurrent;
+
+namespace Venus.Threading;
 
 public static class MainThreadDispatcher
 {
-    private static readonly Queue<Action> queue = [];
+    private static readonly ConcurrentQueue<Action> queue = [];
 
     /// <summary>
     ///     Enqueues an action to be executed on the main thread.
@@ -29,6 +31,8 @@ public static class MainThreadDispatcher
     internal static void Dispatch()
     {
         ArgumentNullException.ThrowIfNull(queue);
+        
+        MainThread.Verify();
         
         while (queue.TryDequeue(out var action))
         {

@@ -1,6 +1,4 @@
-﻿using Venus.Hooks;
-
-namespace Venus;
+﻿namespace Venus.Threading;
 
 public static class MainThread
 {
@@ -14,6 +12,15 @@ public static class MainThread
     /// </value>
     public static bool Current => thread == Thread.CurrentThread.ManagedThreadId;
     
-    [GameHooks.Load]
-    private static void Load() => thread = Environment.CurrentManagedThreadId;
+    public static void Verify()
+    {
+        if (Current)
+        {
+            return;
+        }
+
+        throw new MainThreadException();
+    }
+    
+    internal static void Initialize() => thread = Environment.CurrentManagedThreadId;
 }
