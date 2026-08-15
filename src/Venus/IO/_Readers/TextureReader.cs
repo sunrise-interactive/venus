@@ -8,7 +8,7 @@ public sealed class TextureReader : AssetReader<Texture2D>
     ///     Initializes a new instance of the <see cref="TextureReader"/> class with the specified graphics device.
     /// </summary>
     /// <param name="device">
-    ///     
+    ///     The graphics device of the reader.
     /// </param>
     /// <exception cref="ArgumentNullException">
     ///     <paramref name="device"/> is <see langword="null"/>.
