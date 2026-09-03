@@ -1,30 +1,6 @@
 ﻿namespace Venus.IO;
 
-public abstract class Asset
-{
-    /// <summary>
-    ///     Gets the name of the asset.
-    /// </summary>
-    public string Name { get; }
-    
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="Asset"/> class with the specified name.
-    /// </summary>
-    /// <param name="name">
-    ///     The name of the asset.
-    /// </param>
-    /// <exception cref="ArgumentException">
-    ///     <paramref name="name"/> is <see langword="null"/>.
-    /// </exception>
-    internal Asset(string name)
-    {
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        
-        Name = name;
-    }
-}
-
-public sealed class Asset<TValue> : Asset, IDisposable where TValue : class
+public sealed class Asset<TValue> : IDisposable where TValue : class
 {
     /// <summary>
     ///     Gets the value of the asset.
@@ -37,18 +13,18 @@ public sealed class Asset<TValue> : Asset, IDisposable where TValue : class
             
             if (Unloaded)
             {
-                throw new AssetLoadException();
+                // throw new AssetException();
             }
 
             return field;
         }
         internal set => field = value;
     }
-    
+
     /// <summary>
     ///     Gets the state of the asset.
     /// </summary>
-    public AssetState State { get; private set; }
+    public AssetState State { get; private set; } = AssetState.Unloaded;
     
     /// <summary>
     ///     Gets a value indicating whether the asset is unloaded.
@@ -83,12 +59,26 @@ public sealed class Asset<TValue> : Asset, IDisposable where TValue : class
     public bool Disposed => State == AssetState.Disposed;
 
     /// <summary>
+    ///     Gets the name of the asset.
+    /// </summary>
+    public string Name { get; }
+    
+    /// <summary>
     ///     Initializes a new instance of the <see cref="Asset{TValue}"/> class with the specified name.
     /// </summary>
     /// <param name="name">
     ///     The name of the asset.
     /// </param>
-    public Asset(string name) : base(name) => Value = null!;
+    /// <exception cref="ArgumentException">
+    ///     <paramref name="name"/> is <see langword="null"/>.
+    /// </exception>
+    internal Asset(string name)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(name);
+        
+        Name = name;
+        Value = null!;
+    }
 
     public void Dispose()
     {
