@@ -1,5 +1,8 @@
 ﻿namespace Venus.Graphics;
 
+/// <summary>
+///     Provides <see cref="Rectangle"/> extensions.
+/// </summary>
 public static class RectangleExtensions
 {
     extension(Rectangle rectangle)
