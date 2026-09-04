@@ -6,7 +6,7 @@ public readonly record struct RenderLayer
     ///     Gets the name of the render layer.
     /// </summary>
     public string Name { get; }
-
+    
     /// <summary>
     ///     Initializes a new instance of the <see cref="RenderLayer"/> struct with the specified name.
     /// </summary>
