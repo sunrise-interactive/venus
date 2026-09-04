@@ -2,7 +2,7 @@
 
 public static class GameEngine
 {
-    private static int _thread;
+    private static int _mainThread;
     
     /// <summary>
     ///     Gets a value indicating whether the game engine is initialized.
@@ -18,7 +18,7 @@ public static class GameEngine
     /// <value>
     ///     <see langword="true"/> if the game engine is running on the main thread; otherwise, <see langword="false"/>.
     /// </value>
-    public static bool IsMainThread => Thread.CurrentThread.ManagedThreadId == _thread;
+    public static bool IsMainThread => Thread.CurrentThread.ManagedThreadId == _mainThread;
 
     /// <summary>
     /// 
@@ -33,7 +33,7 @@ public static class GameEngine
             throw new InvalidOperationException();
         }
         
-        _thread = Thread.CurrentThread.ManagedThreadId;
+        _mainThread = Thread.CurrentThread.ManagedThreadId;
         
         IsInitialized = true;
     }
