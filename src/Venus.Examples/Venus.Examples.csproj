@@ -14,5 +14,9 @@
         
       <ProjectReference Include="..\Venus\Venus.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Assets\Music\" />
+    </ItemGroup>
     
 </Project>
