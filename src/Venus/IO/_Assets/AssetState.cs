@@ -3,6 +3,11 @@
 public enum AssetState : byte
 {
     /// <summary>
+    ///     The asset failed to load.
+    /// </summary>
+    Failed,
+    
+    /// <summary>
     ///     The asset is unloaded.
     /// </summary>
     Unloaded,

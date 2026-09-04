@@ -3,28 +3,12 @@
 public sealed class Asset<TValue> : IDisposable where TValue : class
 {
     /// <summary>
-    ///     Gets the value of the asset.
+    ///     Gets a value indicating whether the asset has failed to load.
     /// </summary>
-    public TValue Value
-    {
-        get
-        {
-            ObjectDisposedException.ThrowIf(Disposed, this);
-            
-            if (Unloaded)
-            {
-                // throw new AssetException();
-            }
-
-            return field;
-        }
-        internal set => field = value;
-    }
-
-    /// <summary>
-    ///     Gets the state of the asset.
-    /// </summary>
-    public AssetState State { get; private set; } = AssetState.Unloaded;
+    /// <value>
+    ///     <see langword="true"/> if the asset has failed to load; otherwise, <see langword="false"/>.
+    /// </value>
+    public bool Failed => State == AssetState.Failed;
     
     /// <summary>
     ///     Gets a value indicating whether the asset is unloaded.
@@ -32,7 +16,7 @@ public sealed class Asset<TValue> : IDisposable where TValue : class
     /// <value>
     ///     <see langword="true"/> if the asset is unloaded; otherwise, <see langword="false"/>.
     /// </value>
-    public bool Unloaded => State == AssetState.Unloaded;
+    public bool IsUnloaded => State == AssetState.Unloaded;
     
     /// <summary>
     ///     Gets a value indicating whether the asset is loaded.
@@ -40,7 +24,7 @@ public sealed class Asset<TValue> : IDisposable where TValue : class
     /// <value>
     ///     <see langword="true"/> if the asset is loaded; otherwise, <see langword="false"/>.
     /// </value>
-    public bool Loaded => State == AssetState.Loaded;
+    public bool IsLoaded => State == AssetState.Loaded;
     
     /// <summary>
     ///     Gets a value indicating whether the asset is loading.
@@ -48,7 +32,7 @@ public sealed class Asset<TValue> : IDisposable where TValue : class
     /// <value>
     ///     <see langword="true"/> if the asset is loading; otherwise, <see langword="false"/>.
     /// </value>
-    public bool Loading => State == AssetState.Loading;
+    public bool IsLoading => State == AssetState.Loading;
     
     /// <summary>
     ///     Gets a value indicating whether the asset is disposed.
@@ -56,13 +40,23 @@ public sealed class Asset<TValue> : IDisposable where TValue : class
     /// <value>
     ///     <see langword="true"/> if the asset is disposed; otherwise, <see langword="false"/>.
     /// </value>
-    public bool Disposed => State == AssetState.Disposed;
-
+    public bool IsDisposed => State == AssetState.Disposed;
+    
     /// <summary>
     ///     Gets the name of the asset.
     /// </summary>
     public string Name { get; }
+
+    /// <summary>
+    ///     Gets the value of the asset.
+    /// </summary>
+    public TValue? Value { get; internal set; }
     
+    /// <summary>
+    ///     Gets the state of the asset.
+    /// </summary>
+    public AssetState State { get; internal set; } = AssetState.Unloaded;
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="Asset{TValue}"/> class with the specified name.
     /// </summary>
@@ -70,30 +64,31 @@ public sealed class Asset<TValue> : IDisposable where TValue : class
     ///     The name of the asset.
     /// </param>
     /// <exception cref="ArgumentException">
-    ///     <paramref name="name"/> is <see langword="null"/>.
+    ///     <paramref name="name"/> is <see langword="null"/> or empty.
     /// </exception>
     internal Asset(string name)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
-        
+
         Name = name;
-        Value = null!;
     }
 
+    /// <summary>
+    ///     Releases all resources used by the asset.
+    /// </summary>
     public void Dispose()
     {
         if (State == AssetState.Disposed)
         {
             return;
         }
-
+        
         if (Value is IDisposable disposable)
         {
             disposable.Dispose();
         }
 
+        Value = null;
         State = AssetState.Disposed;
     }
-    
-    public static implicit operator TValue(Asset<TValue> asset) => asset.Value;
 }

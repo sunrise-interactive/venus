@@ -2,7 +2,7 @@
 
 public sealed class TextureReader : IAssetReader<Texture2D>
 {
-    private readonly GraphicsDevice device;
+    private readonly GraphicsDevice _device;
     
     /// <summary>
     ///     Initializes a new instance of the <see cref="TextureReader"/> class with the specified graphics device.
@@ -17,7 +17,7 @@ public sealed class TextureReader : IAssetReader<Texture2D>
     {
         ArgumentNullException.ThrowIfNull(device);
         
-        this.device = device;
+        _device = device;
     }
 
     /// <summary>
@@ -27,15 +27,7 @@ public sealed class TextureReader : IAssetReader<Texture2D>
     ///     The stream to read the texture from.
     /// </param>
     /// <returns>
-    ///     The texture read from the stream.
+    ///     A texture read from the stream.
     /// </returns>
-    /// <exception cref="ArgumentNullException">
-    ///     <paramref name="stream"/> is <see langword="null"/>.
-    /// </exception>
-    public Texture2D Read(Stream stream)
-    {
-        ArgumentNullException.ThrowIfNull(stream);
-        
-        return Texture2D.FromStream(device, stream);
-    }
+    public Texture2D Read(Stream stream) => Texture2D.FromStream(_device, stream);
 }
