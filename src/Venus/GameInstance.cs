@@ -40,7 +40,7 @@ public abstract class GameInstance : Game
         }
 
         _instance = this;
-        
+
         Graphics = new GraphicsDeviceManager(this);
     }
 
