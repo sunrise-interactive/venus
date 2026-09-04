@@ -35,7 +35,7 @@ public sealed class Asset<TValue> : IDisposable where TValue : class
     public bool IsLoading => State == AssetState.Loading;
     
     /// <summary>
-    ///     Gets a value indicating whether the asset is disposed.
+    ///     Gets a value indicating whether the asset has been disposed.
     /// </summary>
     /// <value>
     ///     <see langword="true"/> if the asset is disposed; otherwise, <see langword="false"/>.

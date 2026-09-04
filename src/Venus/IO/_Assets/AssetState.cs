@@ -23,7 +23,7 @@ public enum AssetState : byte
     Loaded,
     
     /// <summary>
-    ///     The asset is disposed.
+    ///     The asset has been disposed.
     /// </summary>
     Disposed
 }

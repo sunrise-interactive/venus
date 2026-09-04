@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using Venus.Graphics;
 using Venus.IO;
 
 namespace Venus;
@@ -19,9 +20,9 @@ public abstract class GameInstance : Game
     public GraphicsDeviceManager Graphics { get; }
 
     /// <summary>
-    ///     Gets the sprite batch of the game.
+    ///     Gets the renderer of the game.
     /// </summary>
-    public SpriteBatch Batch { get; private set; } = null!;
+    public Renderer Renderer { get; private set; } = null!;
     
     /// <summary>
     ///     Gets the asset repository of the game.
@@ -56,23 +57,24 @@ public abstract class GameInstance : Game
     {
         base.LoadContent();
         
-        Batch = new SpriteBatch(GraphicsDevice);
         Assets = new AssetRepository();
+        Renderer = new Renderer(new SpriteBatch(GraphicsDevice));
     }
 
     /// <inheritdoc/>
     protected override void UnloadContent()
     {
         base.UnloadContent();
-        
-        Batch.Dispose();
-    }
-    
-    /// <inheritdoc/>
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
 
         Assets.Dispose();
+        Renderer.Dispose();
+    }
+
+    /// <inheritdoc/>
+    protected override void Draw(GameTime gameTime)
+    {
+        base.Draw(gameTime);
+        
+        Renderer.Flush();
     }
 }

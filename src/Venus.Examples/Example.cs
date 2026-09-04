@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Venus.Graphics;
 
 namespace Venus.Examples;
 
@@ -9,9 +10,10 @@ public sealed class Example : GameInstance
         base.Draw(gameTime);
         
         GraphicsDevice.Clear(Color.Transparent);
-
-        Batch.Begin();
-
-        Batch.End();
+        
+        Renderer.Submit(new Sprite()
+        {
+            Position = new Vector2(0.5f)
+        });
     }
 }
