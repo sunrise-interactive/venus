@@ -18,4 +18,9 @@ public static class Screen
     ///     Gets the size of the screen, in pixels.
     /// </summary>
     public static Vector2 Size => new(Width, Height);
+
+    /// <summary>
+    ///     Gets the bounds of the screen, in pixels.
+    /// </summary>
+    public static Rectangle Bounds => new(0, 0, Width, Height);
 }

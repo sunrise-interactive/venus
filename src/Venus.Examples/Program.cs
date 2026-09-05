@@ -4,7 +4,10 @@ public static class Program
 {
     public static void Main()
     {
-        using var game = new Example();
+        using var game = new Example()
+        {
+            IsFixedTimeStep = false
+        };
         
         game.Run();
     }
