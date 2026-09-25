@@ -25,7 +25,7 @@ public sealed class Renderer : IDisposable
     /// <value>
     ///     <see langword="true"/> if the renderer has been disposed; otherwise, <see langword="false"/>.
     /// </value>
-    public bool Disposed { get; private set; }
+    public bool IsDisposed { get; private set; }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="Renderer"/> class with the specified sprite batch.
@@ -75,14 +75,14 @@ public sealed class Renderer : IDisposable
     /// </summary>
     public void Dispose()
     {
-        if (Disposed)
+        if (IsDisposed)
         {
             return;
         }
         
         _queue.Clear();
         
-        Disposed = true;
+        IsDisposed = true;
     }
 
     private void Draw(in Sprite sprite) => Batch.Draw(null, sprite.Position, sprite.Frame, sprite.Color * sprite.Opacity, sprite.Rotation, sprite.Origin, sprite.Scale, sprite.Effects, 0f);

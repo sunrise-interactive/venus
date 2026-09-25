@@ -4,6 +4,48 @@ namespace Venus.Mathematics;
 
 public static class Easings
 {
+    public static class Sine
+    {
+        /// <summary>
+        ///     Applies a sine easing function to the input value.
+        /// </summary>
+        /// <param name="t">
+        ///     The normalized input value to ease.
+        /// </param>
+        /// <returns>
+        ///     The eased value.
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float In(float t) => MathF.Cos(t * MathF.PI / 2f);
+        
+        /// <summary>
+        ///     Applies a sine easing function to the input value in reverse.
+        /// </summary>
+        /// <param name="t">
+        ///     The normalized input value to ease.
+        /// </param>
+        /// <returns>
+        ///     The eased value.
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Out(float t) => MathF.Sin(t * MathF.PI / 2f);
+    }
+    
+    public static class Linear
+    {
+        /// <summary>
+        ///     Applies a linear easing function to the input value.
+        /// </summary>
+        /// <param name="t">
+        ///     The normalized input value to ease.
+        /// </param>
+        /// <returns>
+        ///     The eased value.
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float In(float t) => t;
+    }
+    
     public static class Quadratic
     {
         /// <summary>

@@ -31,7 +31,7 @@ public sealed class RenderQueue
 
         _commands = new List<RenderCommand>(capacity);
     }
-    
+
     /// <summary>
     ///     Clears all render commands from the queue.
     /// </summary>

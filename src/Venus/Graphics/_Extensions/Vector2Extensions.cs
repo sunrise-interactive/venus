@@ -10,6 +10,14 @@ public static class Vector2Extensions
     extension(Vector2 vector)
     {
         /// <summary>
+        ///     Converts the vector to a <see cref="Point"/>.
+        /// </summary>
+        /// <returns>
+        ///     The converted <see cref="Point"/>.
+        /// </returns>
+        public Point ToPoint() => new Point((int)vector.X, (int)vector.Y);
+        
+        /// <summary>
         ///     Converts the vector to a <see cref="Vector3"/>.
         /// </summary>
         /// <param name="z">

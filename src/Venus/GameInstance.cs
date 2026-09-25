@@ -1,5 +1,4 @@
 ﻿using JetBrains.Annotations;
-using Venus.IO;
 
 namespace Venus;
 
@@ -10,6 +9,9 @@ public abstract class GameInstance : Game
     /// <summary>
     ///     Gets the current game instance.
     /// </summary>
+    /// <exception cref="InvalidOperationException">
+    ///     <see cref="_instance"/> is <see langword="null"/>.
+    /// </exception>
     public static GameInstance Instance => _instance ?? throw new InvalidOperationException();
     
     /// <summary>
@@ -17,11 +19,6 @@ public abstract class GameInstance : Game
     /// </summary>
     [UsedImplicitly]
     public GraphicsDeviceManager Graphics { get; }
-
-    /// <summary>
-    ///     Gets the asset repository of the game.
-    /// </summary>
-    public AssetRepository Assets { get; private set; } = null!;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="GameInstance"/> class.
@@ -44,21 +41,5 @@ public abstract class GameInstance : Game
         base.Initialize();
         
         GameEngine.Initialize();
-    }
-
-    /// <inheritdoc/>
-    protected override void LoadContent()
-    {
-        base.LoadContent();
-        
-        Assets = new AssetRepository();
-    }
-
-    /// <inheritdoc/>
-    protected override void UnloadContent()
-    {
-        base.UnloadContent();
-
-        Assets.Dispose();
     }
 }
