@@ -1,9 +1,12 @@
-﻿using Silk.NET.Windowing;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Silk.NET.Windowing;
 
 namespace Venus;
 
 public abstract class Game : IDisposable
 {
+    private ServiceProvider? _services;
+    
     private IWindow? _window;
 
     /// <summary>
@@ -19,6 +22,14 @@ public abstract class Game : IDisposable
     }
 
     /// <summary>
+    ///     
+    /// </summary>
+    /// <exception cref="InvalidOperationException">
+    ///     
+    /// </exception>
+    public IServiceProvider Services => _services ?? throw new InvalidOperationException();
+    
+    /// <summary>
     ///     Releases all resources used by the game.
     /// </summary>
     public void Dispose()
@@ -31,7 +42,7 @@ public abstract class Game : IDisposable
         Dispose(true);
         
         Disposed = true;
-        
+
         GC.SuppressFinalize(this);
     }
     
@@ -45,21 +56,53 @@ public abstract class Game : IDisposable
         Configure(ref options);
         
         _window = Window.Create(options);
-        
-        _window.Load += Load;
-        
-        _window.Update += Update;
-        _window.Render += Render;
+
+        _window.Load += Load_Inner;
+
+        _window.Update += Update_Inner;
+        _window.Render += Render_Inner;
         
         _window.Run();
     }
+    
+    private void Load_Inner()
+    {
+        var collection = new ServiceCollection();
+        
+        Configure(ref collection);
 
+        collection.AddSingleton(new Time());
+
+        _services = collection.BuildServiceProvider();
+
+        Load();
+    }
+
+    private void Update_Inner(double delta)
+    {
+        Update();
+    }
+
+    private void Render_Inner(double delta)
+    {
+        Render();
+    }
+    
+    /// <summary>
+    ///     Occurs when the game window is loaded.
+    /// </summary>
     protected virtual void Load() { }
-
-    protected virtual void Update(double delta) { }
-
-    protected virtual void Render(double delta) { }
-
+    
+    /// <summary>
+    ///     Occurs when the game window is updated.
+    /// </summary>
+    protected virtual void Update() { }
+    
+    /// <summary>
+    ///     Occurs when the game window is rendered.
+    /// </summary>
+    protected virtual void Render() { }
+    
     /// <summary>
     ///     Releases the unmanaged resources used by the game and optionally releases the managed resources.
     /// </summary>
@@ -73,6 +116,9 @@ public abstract class Game : IDisposable
             return;
         }
 
+        _services?.Dispose();
+        _services = null;
+
         _window?.Dispose();
         _window = null;
     }
@@ -84,6 +130,14 @@ public abstract class Game : IDisposable
     ///     The window options to configure.
     /// </param>
     protected virtual void Configure(ref WindowOptions options) { }
+    
+    /// <summary>
+    ///     Configures the service collection used to build the game service provider.
+    /// </summary>
+    /// <param name="services">
+    ///     The service collection to configure.
+    /// </param>
+    protected virtual void Configure(ref ServiceCollection services) { }
     
     /// <summary>
     ///     Finalizes an instance of the <see cref="Game"/> class.
