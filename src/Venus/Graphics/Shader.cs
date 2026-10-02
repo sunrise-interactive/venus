@@ -29,7 +29,7 @@ public sealed class Shader : IDisposable
     {
         get;
     }
-
+    
     /// <summary>
     ///     Initializes a new instance of the <see cref="Shader"/> class.
     /// </summary>
