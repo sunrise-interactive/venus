@@ -2,12 +2,9 @@
 
 public static class Program
 {
-    public static void Main()
+    public static void Main(string[] args)
     {
-        using var game = new Example()
-        {
-            IsFixedTimeStep = false
-        };
+        var game = new Venus();
         
         game.Run();
     }

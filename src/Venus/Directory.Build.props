@@ -12,22 +12,22 @@
     </PropertyGroup>
     <!-- Sets compilation options -->
     <PropertyGroup>
-        <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     <!-- Sets global usings -->
     <ItemGroup>
         <Using Include="System" />
-        <Using Include="Microsoft.Xna.Framework" />
-        <Using Include="Microsoft.Xna.Framework.Graphics" />
-    </ItemGroup>
-    <!-- Sets project dependencies -->
-    <ItemGroup>
-        <ProjectReference Include="..\..\submodules\FNA\FNA.Core.csproj" />
     </ItemGroup>
     <!-- Sets NuGet package dependencies -->
     <ItemGroup>
+        <!-- Annotations -->
         <PackageReference Include="JetBrains.Annotations" Version="2026.2.0" />
+        <!-- Graphics -->
+        <PackageReference Include="Silk.NET.WebGPU" Version="2.23.0" />
+        <!-- Common -->
+        <PackageReference Include="Silk.NET.Input" Version="2.23.0" />
+        <PackageReference Include="Silk.NET.Windowing" Version="2.23.0" />
     </ItemGroup>
 </Project>
